@@ -37,6 +37,9 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'inventory',
+    'rest_framework',
+    'djongo',
 ]
 
 MIDDLEWARE = [
@@ -69,16 +72,22 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'inventory_system.wsgi.application'
 
+import os
+from dotenv import load_dotenv
 
-# Database
-# https://docs.djangoproject.com/en/4.1/ref/settings/#databases
+load_dotenv()
 
 DATABASES = {
     'default': {
         'ENGINE': 'djongo',
-        'NAME': 'inventory_management',
+        'NAME': os.getenv('MONGO_DB_NAME'),
+        'CLIENT': {
+            'host': f'mongodb+srv://{os.getenv("MONGO_USERNAME")}:{os.getenv("MONGO_PASSWORD")}@{os.getenv("MONGO_DB_NAME")}.cze4q.mongodb.net/?retryWrites=true&w=majority&appName=inventorymanagement',
+            'ssl_cert_reqs': False, 
+        }
     }
 }
+
 
 
 # Password validation
