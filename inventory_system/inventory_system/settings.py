@@ -77,8 +77,15 @@ DATABASES = {
     'default': {
         'ENGINE': 'djongo',
         'NAME': 'inventory_management',
+        'CLIENT': {
+            'host': 'mongodb://root:example@mongodb:27017/',
+            'username': 'root',
+            'password': 'example',
+            'authSource': 'admin',
+        }
     }
 }
+
 
 
 # Password validation
